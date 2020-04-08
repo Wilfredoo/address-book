@@ -4,6 +4,7 @@
       Address Book
     </title>
     <script src="./javascript/vue.js"></script>
+
     <link
       type="text/css"
       rel="stylesheet"
@@ -19,7 +20,8 @@
   </head>
   <body>
     <div id="app">
-      <div class="container">
+        <b-container fluid="md">
+
         <table>
           <thead>
             <tr>
@@ -41,12 +43,14 @@
           </tbody>
         </table>
         <b-button v-b-modal.modal-1>Add Entry</b-button>
-        <b-modal id="modal-1" size="lg" centered title="BootstrapVue">
+        <b-modal hide-footer="true"
+
+         id="modal-1" size="lg" centered title="BootstrapVue">
           <div class="row-md">
-            <form>
+            <form @submit="onSubmit">
               <div class="form-group">
                 <label>ID</label>
-                <input type="text" class="form-control" v-model="input.id" />
+                <input type="number" class="form-control" v-model="input.id" />
               </div>
               <div class="form-group">
                 <label>Name</label>
@@ -54,11 +58,11 @@
               </div>
               <div class="form-group">
                 <label>Email</label>
-                <input type="text" class="form-control" v-model="input.email" />
+                <input type="email" class="form-control" v-model="input.email" />
               </div>
               <div class="form-group">
                 <label>Phone</label>
-                <input type="text" class="form-control" v-model="input.phone" />
+                <input type="number" class="form-control" v-model="input.phone" />
               </div>
               <div class="form-group">
                 <label>Address</label>
@@ -68,10 +72,18 @@
                   v-model="input.address"
                 />
               </div>
+              <button class="button">Send</button>
+
             </form>
+            <p v-if="errors.length">
+              <b>Please correct the following error(s):</b>
+              <ul>
+                <li v-for="error in errors">{{ error }}</li>
+              </ul>
+            </p>
           </div>
           <template v-slot:modal-footer="{ add, cancel }">
-            <b-button size="sm" variant="success" @click.prevent="save">
+            <b-button size="sm" variant="success" @click.prevent="checkForm()">
               Add
             </b-button>
             <b-button size="sm" variant="danger" @click="cancel()">
@@ -79,59 +91,9 @@
             </b-button>
           </template>
         </b-modal>
+    </b-container>
       </div>
     </div>
-    <script>
-      new Vue({
-        el: "#app",
-        data: {
-          items: [
-            {
-              id: "1",
-              name: "Wilfredo",
-              email: "me@wilfredocasas.com",
-              phone: "+491777898706",
-              address: "groniger str 35",
-            },
-          ],
-          input: {
-            id: "",
-            name: "",
-            email: "",
-            phone: "",
-            address: "",
-          },
-        },
-        methods: {
-          save: function () {
-            let id = this.input.id;
-            let nm = this.input.name;
-            let em = this.input.email;
-            let ph = this.input.phone;
-            let ad = this.input.address;
-
-            this.items.push({
-              id: id,
-              name: nm,
-              email: em,
-              phone: ph,
-              address: ad,
-            });
-            this.clear();
-            this.ok();
-          },
-          clear: function () {
-            this.input.id = "";
-            this.input.name = "";
-            this.input.email = "";
-            this.input.phone = "";
-            this.input.address = "";
-          },
-          close: function () {
-            this.$bvModal.hide("modal-1");
-          },
-        },
-      });
-    </script>
+    <script type="text/javascript" src="./index.js"></script>
   </body>
 </html>
