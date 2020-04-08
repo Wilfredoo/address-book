@@ -40,44 +40,46 @@
             </tr>
           </tbody>
         </table>
+        <b-button v-b-modal.modal-1>Add Entry</b-button>
+        <b-modal id="modal-1" size="lg" centered title="BootstrapVue">
+          <div class="row-md">
+            <form>
+              <div class="form-group">
+                <label>ID</label>
+                <input type="text" class="form-control" v-model="input.id" />
+              </div>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" v-model="input.name" />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" v-model="input.email" />
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" v-model="input.phone" />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="input.address"
+                />
+              </div>
+            </form>
+          </div>
+          <template v-slot:modal-footer="{ add, cancel }">
+            <b-button size="sm" variant="success" @click.prevent="save">
+              Add
+            </b-button>
+            <b-button size="sm" variant="danger" @click="cancel()">
+              Cancel
+            </b-button>
+          </template>
+        </b-modal>
       </div>
-      <b-button v-b-modal.modal-1>Add Entry</b-button>
-      <b-modal id="modal-1" title="BootstrapVue">
-        <div class="col-md-4">
-          <form>
-            <div class="form-group">
-              <label>ID</label>
-              <input type="text" class="form-control" v-model="input.id" />
-            </div>
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control" v-model="input.name" />
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="text" class="form-control" v-model="input.email" />
-            </div>
-            <div class="form-group">
-              <label>Phone</label>
-              <input type="text" class="form-control" v-model="input.phone" />
-            </div>
-            <div class="form-group">
-              <label>Address</label>
-              <input type="text" class="form-control" v-model="input.address" />
-            </div>
-            <button @click.prevent="save" class="btn btn-primary">Save</button>
-          </form>
-        </div>
-        <template v-slot:modal-footer="{ add, cancel }">
-          <b>Custom Footer</b>
-          <b-button size="sm" variant="success" @click.prevent="save">
-            Add
-          </b-button>
-          <b-button size="sm" variant="danger" @click="cancel()">
-            Cancel
-          </b-button>
-        </template>
-      </b-modal>
     </div>
     <script>
       new Vue({
