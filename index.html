@@ -4,16 +4,114 @@
       Address Book
     </title>
     <script src="./javascript/vue.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"
+    />
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
   </head>
   <body>
     <div id="app">
-      {{message}}
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in items" v-bind:key="item-id">
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.phone}}</td>
+              <td>{{item.address}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <form>
+          <div class="form-group">
+            <label>ID</label>
+            <input type="text" class="form-control" v-model="input.id" />
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" v-model="input.name" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" v-model="input.email" />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" class="form-control" v-model="input.phone" />
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" v-model="input.address" />
+          </div>
+          <button @click.prevent="save" class="btn btn-primary">Save</button>
+        </form>
+      </div>
     </div>
     <script>
       new Vue({
         el: "#app",
         data: {
-          message: "Hello vue vue vue",
+          items: [
+            {
+              id: "1",
+              name: "Wilfredo",
+              email: "me@wilfredocasas.com",
+              phone: "+491777898706",
+              address: "groniger str 35",
+            },
+          ],
+          input: {
+            id: "",
+            name: "",
+            email: "",
+            phone: "",
+            address: "",
+          },
+        },
+        methods: {
+          save: function () {
+            let id = this.input.id;
+            let nm = this.input.name;
+            let em = this.input.email;
+            let ph = this.input.phone;
+            let ad = this.input.address;
+
+            this.items.push({
+              id: id,
+              name: nm,
+              email: em,
+              phone: ph,
+              address: ad,
+            });
+            this.clear();
+          },
+          clear: function () {
+            this.input.id = "";
+            this.input.name = "";
+            this.input.email = "";
+            this.input.phone = "";
+            this.input.address = "";
+          },
         },
       });
     </script>
