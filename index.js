@@ -22,22 +22,22 @@ new Vue({
   methods: {
     onSubmit(e) {
       e.preventDefault();
-      //   this.checkForm();
-      this.save();
+      this.checkForm();
     },
     checkForm: function () {
       this.errors = [];
       if (
-        !this.id ||
-        !this.name ||
-        !this.email ||
-        !this.phone ||
-        !this.address
+        !this.input.id ||
+        !this.input.name ||
+        !this.input.email ||
+        !this.input.phone ||
+        !this.input.address
       ) {
         this.errors.push("Please fill al the fields");
+      } else {
+        this.save();
       }
     },
-
     save: function () {
       let id = this.input.id;
       let nm = this.input.name;
